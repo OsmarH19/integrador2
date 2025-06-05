@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+	<title>app-logo-white</title>
+	<defs>
+		<image  width="30" height="30" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAAXNSR0IB2cksfwAAAFRQTFRF////////////////////////////////////////////////////////////////////////////////////////////////////////////////lDHgPQAAABx0Uk5TAJr/GvnZzdPg85MULbnAM7MggMZTpuxmTXOgOn3BnaIAAADjSURBVHichZPbDoIwDIbXESBBkWCMRt//1Yx6oRGiwRiYzu7ADkV6AUs/2vVvCzBlAMw1Ydz45CwyGCwmqM4AkxQ5OJTLAgDeFuedxMULUe9HLjoMBxVcPOLcEghIPq4Qz9JBALe0fGr3Ehp1SIYRB/WrfBYHbdN8Mlpe1vzFmHMszdek3Fp3JEx9IMAcSC5sz1d3AlcSrwPAWH3VPKMHapVgM9TQJjHZ0Z+Lj63cQFvd0rIVRX4xEVvI+t0putsRxslp27YczvK9P5LUW8XQcBXnFnnuNyB5iftmdNeNV5nZ+i8HdzxY8bc41AAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="app-logo" href="#img1" x="1" y="1"/>
+</svg>

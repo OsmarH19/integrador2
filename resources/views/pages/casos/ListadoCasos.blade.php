@@ -1,0 +1,141 @@
+<x-app-layout title="Datos Maestros" is-header-blur="true">
+
+    <main class="main-content w-full px-[var(--margin-x)] pb-8">
+        <div id="TipoCatalogo">
+            <div class="mt-12 text-start flex flex-wrap items-start justify-between gap-6 w-full">
+                <h3 class="text-xl font-semibold text-slate-600 dark:text-navy-100">
+                    Listado Casos </h3>
+
+                <div class="pr-5">
+                    <a href="{{ route('layouts/entes') }}"
+                        class="btn rounded-xl bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                        <span>Nuevo</span>
+                        <i class="fa-solid fa-plus pl-2.5"></i>
+                    </a>
+                </div>
+
+            </div>
+            <div class="py-4">
+                <div>
+                    <div class="uppercase text-xs" x-data x-init="$nextTick(() => {
+                        $el._x_grid = new Gridjs.Grid({
+                            from: $refs.table,
+                            sort: true,
+                            search: true,
+                            pagination: {
+                                enabled: true,
+                                limit: 7
+                            },
+                            language: {
+                                search: { placeholder: 'Buscar...' },
+                                pagination: {
+                                    previous: 'Anterior',
+                                    next: 'Siguiente',
+                                    showing: 'Mostrando',
+                                    of: 'de',
+                                    to: 'a',
+                                    results: () => 'Resultados'
+                                }
+                            }
+                        }).render($refs.wrapper);
+                    })">
+
+
+                        <div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+                            <table x-ref="table" class="w-full text-left">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Descipción
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Fecha
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Nombre
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Apellido
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Tipo Documento
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Número Documento
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            COLABORADOR
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach ($casos as $caso)
+                                        <tr class="hover:bg-slate-50 dark:hover:bg-navy-600">
+                                            <td class="whitespace-nowrap px-3 py-2">
+                                                <button
+                                                    x-on:click="window.location.href='{{ route('layouts/EditarRegistrosEntes', $caso->enteID) }}'"
+                                                    class="btn size-7 p-0 text-info hover:bg-info/20"
+                                                    title="Editar ente">
+                                                    <i class="fa fa-edit text-xs"></i>
+                                                </button>
+
+                                            </td>
+                                            {{-- <td class="whitespace-nowrap px-3 py-2">{{ $item->nombre }}
+                                                {{ $item->apellido }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">
+                                                {{ $item->tipoIdentificacion->nombre ?? 'N/A' }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $item->nroIdentificacion }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $item->fechaEmisionIdent }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">
+                                                {{ $item->tipoEnte->nombre ?? 'N/A' }}</td> --}}
+
+
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->descripcion }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_nombres }} {{ $caso->lesionado_apellidos }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->ubicacion }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ ucfirst($caso->estado) }}</td>
+                                            {{-- <td class="whitespace-nowrap px-3 py-2">
+                                                @if ($item->pais)
+                                                    <span class="flex items-center gap-2">
+                                                        <img src="https://flagcdn.com/w40/{{ strtolower($item->pais->CodigoBandera) }}.png"
+                                                            class="w-5 h-3 inline-block"
+                                                            alt="{{ $item->pais->Nombre }}" />
+                                                        <span>{{ $item->pais->Nombre }}</span>
+                                                    </span>
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </td> --}}
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->created_at }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">
+                                                @if ($caso->creador)
+                                                    {{ $caso->creador->name }}
+                                                @else
+                                                    <span class="text-gray-400">Registro no encontrado</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div x-ref="wrapper"></div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+</x-app-layout>
