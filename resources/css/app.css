@@ -18,43 +18,53 @@
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
 
-    --color-navy-50: #e7e9ef;
-    --color-navy-100: #c2c9d6;
-    --color-navy-200: #a3adc2;
-    --color-navy-300: #697a9b;
-    --color-navy-400: #5c6b8a;
-    --color-navy-450: #465675;
-    --color-navy-500: #384766;
-    --color-navy-600: #313e59;
-    --color-navy-700: #26334d;
-    --color-navy-750: #222e45;
-    --color-navy-800: #202b40;
-    --color-navy-900: #192132;
+        /* Principal: Rojo oscuro (#ad2121) */
+        --color-primary-light: #e26a6a;
+        --color-primary: #ad2121;
+        --color-primary-focus: #8b1b1b;
 
-    --color-slate-150: #e9eef5;
+        /* Secundario: Rojo profundo complementario */
+        --color-secondary-light: #f29999;
+        --color-secondary: #c73636;
+        --color-secondary-focus: #a62b2b;
 
-    --color-primary: #3266af;
-    --color-primary-focus: #274f88;
+        /* Acento: Más suave para detalles */
+        --color-accent-light: #f4b3b3;
+        --color-accent: #e57a7a;
+        --color-accent-focus: #cc5050;
 
-    --color-secondary-light: #6f9fe8;
-    --color-secondary: #4b87d3;
-    --color-secondary-focus: #3b6bab;
+        /* Info: Azul menos vibrante para que no compita visualmente */
+        --color-info: #4a6ca8;
+        --color-info-focus: #3c5584;
 
-    --color-accent-light: #89b0f0;
-    --color-accent: #5f8fe0;
-    --color-accent-focus: #4a78c0;
+        /* Éxito: Verde más oscuro, menos saturado */
+        --color-success: #2f8c6e;
+        --color-success-focus: #226951;
 
-    --color-info: #2a93d5;
-    --color-info-focus: #2075ac;
+        /* Advertencia: Amarillo oscuro que combine con el rojo */
+        --color-warning: #d18700;
+        --color-warning-focus: #a46500;
 
-    --color-success: #1a9f7c;
-    --color-success-focus: #157b5f;
+        /* Error: Cercano al principal para consistencia */
+        --color-error: #c12828;
+        --color-error-focus: #991f1f;
 
-    --color-warning: #e0a400;
-    --color-warning-focus: #b38200;
+        /* Grises y fondos */
+        --color-slate-150: #f5eaea;
 
-    --color-error: #d94f3d;
-    --color-error-focus: #b03e2f;
+        /* Tonos navy opcionales (puedes atenuarlos o usar como contraste) */
+        --color-navy-50: #f4ebeb;
+        --color-navy-100: #e8d3d3;
+        --color-navy-200: #d8a9a9;
+        --color-navy-300: #ba6e6e;
+        --color-navy-400: #a64848;
+        --color-navy-450: #913636;
+        --color-navy-500: #7b2d2d;
+        --color-navy-600: #692525;
+        --color-navy-700: #541c1c;
+        --color-navy-750: #471717;
+        --color-navy-800: #3c1414;
+        --color-navy-900: #2d0f0f;
 
 
     --shadow-soft: 0 3px 10px 0 rgb(48 46 56 / 6%);
