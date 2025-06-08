@@ -7,7 +7,7 @@
                     Listado Casos </h3>
 
                 <div class="pr-5">
-                    <a href="{{ route('layouts/entes') }}"
+                    <a href="{{ route('layouts/casos') }}"
                         class="btn rounded-xl bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
                         <span>Nuevo</span>
                         <i class="fa-solid fa-plus pl-2.5"></i>
@@ -88,33 +88,11 @@
                                                 </button>
 
                                             </td>
-                                            {{-- <td class="whitespace-nowrap px-3 py-2">{{ $item->nombre }}
-                                                {{ $item->apellido }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">
-                                                {{ $item->tipoIdentificacion->nombre ?? 'N/A' }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $item->nroIdentificacion }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $item->fechaEmisionIdent }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">
-                                                {{ $item->tipoEnte->nombre ?? 'N/A' }}</td> --}}
-
-
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->descripcion }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_nombres }} {{ $caso->lesionado_apellidos }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->ubicacion }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ ucfirst($caso->estado) }}</td>
-                                            {{-- <td class="whitespace-nowrap px-3 py-2">
-                                                @if ($item->pais)
-                                                    <span class="flex items-center gap-2">
-                                                        <img src="https://flagcdn.com/w40/{{ strtolower($item->pais->CodigoBandera) }}.png"
-                                                            class="w-5 h-3 inline-block"
-                                                            alt="{{ $item->pais->Nombre }}" />
-                                                        <span>{{ $item->pais->Nombre }}</span>
-                                                    </span>
-                                                @else
-                                                    N/A
-                                                @endif
-                                            </td> --}}
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->created_at }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">
                                                 @if ($caso->creador)

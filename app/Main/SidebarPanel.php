@@ -309,11 +309,11 @@ class SidebarPanel
                         'submenu' => [
                             'layouts_user_card_1' => [
                                 'title' => 'Registro de Entes',
-                                'route_name' => 'layouts/RegistrosEntes'
+                                'route_name' => 'layouts/Registroscasos'
                             ],
                             'layouts_user_card_2' => [
                                 'title' => 'Resportes',
-                                'route_name' => 'layouts/entes'
+                                'route_name' => 'layouts/casos'
                             ],
                             // 'layouts_user_card_3' => [
                             //     'title' => 'Edicion',
@@ -583,11 +583,11 @@ class SidebarPanel
                         'submenu' => [
                             'layouts_user_card_1' => [
                                 'title' => 'Registro de Entes',
-                                'route_name' => 'layouts/RegistrosEntes'
+                                'route_name' => 'layouts/Registroscasos'
                             ],
                             'layouts_user_card_2' => [
                                 'title' => 'Resportes',
-                                'route_name' => 'layouts/entes'
+                                'route_name' => 'layouts/casos'
                             ],
                             // 'layouts_user_card_3' => [
                             //     'title' => 'Edicion',

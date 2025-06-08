@@ -41,9 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/update', [PerfilController::class, 'updateProfile'])->name('profile.update');
 
     // OPERACIONES
-    Route::get('/entes', [OperacionesController::class, 'DatosFormulario'])->name('layouts/entes');
-    Route::post('/entes', [OperacionesController::class, 'guardarEnte'])->name('entes/guardar');
-    Route::get('/ListadoCasos', [CasosController::class, 'listadoCasos'])->name('layouts/RegistrosEntes');
+    Route::get('/casos', [CasosController::class, 'DatosFormulario'])->name('layouts/casos');
+    Route::post('/casos', [CasosController::class, 'guardarEnte'])->name('casos/guardar');
+    Route::get('/ListadoCasos', [CasosController::class, 'listadoCasos'])->name('layouts/Registroscasos');
     Route::get('/EditarRegistrosEntes/{id}', [OperacionesController::class, 'EditarRegistrosEntes'])->name('layouts/EditarRegistrosEntes');
     Route::put('/entes/{ente}/actualizar', [OperacionesController::class, 'ActualizarRegistroEnte'])->name('entes.actualizar');
     Route::post('/entes/{ente}/actualizar-direccion', [OperacionesController::class, 'actualizarDireccion'])->name('entes.actualizar-direccion');
