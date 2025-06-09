@@ -103,7 +103,10 @@
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_apellido_materno }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_tipo_documento }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_numero_documento }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->created_by }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">
+                                                {{ $caso->creador ? $caso->creador->name : 'Usuario no encontrado' }}
+                                            </td>
+
                                             <td class="whitespace-nowrap px-3 py-2">
                                                 @if ($caso->creador)
                                                     {{ $caso->creador->name }}

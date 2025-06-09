@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class Casos extends Model
 {
@@ -53,8 +55,8 @@ class Casos extends Model
         return $this->belongsTo(CentrosMedicos::class, 'centro_medico_id');
     }
 
-    public function users(): HasMany
+    public function creador(): BelongsTo
     {
-        return $this->hasMany(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
 }
