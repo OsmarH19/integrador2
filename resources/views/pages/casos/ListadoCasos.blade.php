@@ -1,4 +1,4 @@
-<x-app-layout title="Datos Maestros" is-header-blur="true">
+<x-app-layout title="Listado Casos" is-header-blur="true">
 
     <main class="main-content w-full px-[var(--margin-x)] pb-8">
         <div id="TipoCatalogo">
