@@ -59,13 +59,24 @@ class CasosController extends Controller
             $casos->lesionado_numero_documento = $request->lesionado_numero_documento;
             $casos->poliza_id = $request->poliza_id;
             $casos->centro_medico_id = $request->centro_medico_id;
-            $casos->Placa = $request->Placa;
-            $casos->FechaInicio = Carbon::createFromFormat('d/m/Y', $request->FechaInicio)->format('Y-m-d');
-            $casos->FechaFin = Carbon::createFromFormat('d/m/Y', $request->FechaFin)->format('Y-m-d');
-            $casos->EstadoPlaca = $request->EstadoPlaca;
-            $casos->NombreClaseVehiculo = $request->NombreClaseVehiculo;
-            $casos->TipoCertificado = $request->TipoCertificado;
-            $casos->NumeroAseguradora = $request->NumeroAseguradora;
+
+            if ($request->has('Placa') && $request->Placa) {
+                $casos->Placa = $request->Placa;
+
+                if ($request->FechaInicio) {
+                    $casos->FechaInicio = Carbon::createFromFormat('d/m/Y', $request->FechaInicio)->format('Y-m-d');
+                }
+
+                if ($request->FechaFin) {
+                    $casos->FechaFin = Carbon::createFromFormat('d/m/Y', $request->FechaFin)->format('Y-m-d');
+                }
+
+                $casos->EstadoPlaca = $request->EstadoPlaca;
+                $casos->NombreClaseVehiculo = $request->NombreClaseVehiculo;
+                $casos->TipoCertificado = $request->TipoCertificado;
+                $casos->NumeroAseguradora = $request->NumeroAseguradora;
+            }
+
             $casos->created_by = Auth::user()->id;
             \Log::debug('Guardando caso...');
             $casos->save();
@@ -82,7 +93,6 @@ class CasosController extends Controller
             $lesionado->numero_documento = $request->lesionado_numero_documento;
             $lesionado->save();
             \Log::debug('Lesionado guardado con ID: ' . $lesionado->id);
-            // dd($lesionado);
 
             DB::commit();
             return back()->withInput()->with('success', 'Solicitud enviada correctamente');

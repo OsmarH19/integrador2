@@ -69,11 +69,88 @@
                         </div>
                     </div>
                     <div id="bloques-complementarios" style="display: none;">
-                        {{-- DATOS DEL LESIONADO --}}
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos del Lesionado</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div id="datos-placa-section" style="display: none;">
+                            {{-- DATOS PLACA --}}
+                            <div class="md:mt-5">
+                                <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos de Placa</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 
+                                    <div>
+                                        <label for="Placa"
+                                            class="block mb-1 text-sm font-medium text-gray-600">Número
+                                            de Placa</label>
+                                        <input type="text" name="Placa" id="Placa"
+                                            class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Seleccione primero el tipo de documento" />
+                                    </div>
+
+                                    <div>
+                                        <label for="FechaInicio"
+                                            class="block mb-1 text-sm font-medium text-gray-600">Fecha
+                                            Inicio</label>
+                                        <input type="text" name="FechaInicio" id="FechaInicio" disabled
+                                            class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                        <input type="hidden" name="FechaInicio" id="FechaInicio_hidden">
+                                    </div>
+
+                                    <div>
+                                        <label for="FechaFin" class="block mb-1 text-sm font-medium text-gray-600">Fecha
+                                            Fin</label>
+                                        <input type="text" name="FechaFin" id="FechaFin" required disabled
+                                            class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                        <input type="hidden" name="FechaFin" id="FechaFin_hidden">
+                                    </div>
+
+                                    <div>
+                                        <label for="EstadoPlaca"
+                                            class="block mb-1 text-sm font-medium text-gray-600">Estado
+                                            Placa</label>
+                                        <input type="text" name="EstadoPlaca" id="EstadoPlaca" required disabled
+                                            class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                        <input type="hidden" name="EstadoPlaca" id="EstadoPlaca_hidden">
+                                    </div>
+
+                                    <div>
+                                        <label for="NombreClaseVehiculo"
+                                            class="block mb-1 text-sm font-medium text-gray-600">Clase
+                                            Vehiculo</label>
+                                        <input type="text" name="NombreClaseVehiculo" id="NombreClaseVehiculo"
+                                            required disabled
+                                            class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                        <input type="hidden" name="NombreClaseVehiculo"
+                                            id="NombreClaseVehiculo_hidden">
+                                    </div>
+
+                                    <div>
+                                        <label for="TipoCertificado"
+                                            class="block mb-1 text-sm font-medium text-gray-600">Tipo
+                                            Certificado</label>
+                                        <input type="text" name="TipoCertificado" id="TipoCertificado" required
+                                            disabled
+                                            class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                        <input type="hidden" name="TipoCertificado" id="TipoCertificado_hidden">
+                                    </div>
+
+                                    <div>
+                                        <label for="NumeroAseguradora"
+                                            class="block mb-1 text-sm font-medium text-gray-600">Número
+                                            Aseguradora</label>
+                                        <input type="text" name="NumeroAseguradora" id="NumeroAseguradora" required
+                                            disabled
+                                            class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                        <input type="hidden" name="NumeroAseguradora" id="NumeroAseguradora_hidden">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- DATOS DEL LESIONADO --}}
+                        <div class="md:mt-5">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos del Lesionado</h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                                 <!-- Para tipo de documento -->
                                 <div>
                                     <label for="lesionado_tipo_documento"
@@ -90,7 +167,8 @@
 
                                 <div>
                                     <label for="lesionado_numero_documento"
-                                        class="block mb-1 text-sm font-medium text-gray-600">Número de Documento</label>
+                                        class="block mb-1 text-sm font-medium text-gray-600">Número de
+                                        Documento</label>
                                     <input type="text" name="lesionado_numero_documento"
                                         id="lesionado_numero_documento" required disabled
                                         class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -164,7 +242,8 @@
                                 <div>
                                     <label for="centro_medico_id"
                                         class="block mb-1 text-sm font-medium text-gray-600">Centro Médico</label>
-                                    <select name="centro_medico_id" id="centro_medico_id" class="select2 ..." required>
+                                    <select name="centro_medico_id" id="centro_medico_id" class="select2 ..."
+                                        required>
                                         <option value="" disabled selected>Seleccione una póliza</option>
                                         @foreach (\App\Models\CentrosMedicos::all() as $centro)
                                             <option value="{{ $centro->id }}">{{ $centro->nombre }}</option>
@@ -183,80 +262,6 @@
                             </div>
                         </div>
 
-                        {{-- DATOS PLACA --}}
-                        <div class="md:mt-5">
-                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos de Placa</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-
-                                <div>
-                                    <label for="Placa" class="block mb-1 text-sm font-medium text-gray-600">Número
-                                        de Placa</label>
-                                    <input type="text" name="Placa" id="Placa"
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="Seleccione primero el tipo de documento" />
-                                </div>
-
-                                <div>
-                                    <label for="FechaInicio"
-                                        class="block mb-1 text-sm font-medium text-gray-600">Fecha Inicio</label>
-                                    <input type="text" name="FechaInicio" id="FechaInicio" disabled
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                    <input type="hidden" name="FechaInicio" id="FechaInicio_hidden">
-                                </div>
-
-                                <div>
-                                    <label for="FechaFin"
-                                        class="block mb-1 text-sm font-medium text-gray-600">Fecha Fin</label>
-                                    <input type="text" name="FechaFin"
-                                        id="FechaFin" required disabled
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                    <input type="hidden" name="FechaFin"
-                                        id="FechaFin_hidden">
-                                </div>
-
-                                <div>
-                                    <label for="EstadoPlaca"
-                                        class="block mb-1 text-sm font-medium text-gray-600">Estado Placa</label>
-                                    <input type="text" name="EstadoPlaca"
-                                        id="EstadoPlaca" required disabled
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                    <input type="hidden" name="EstadoPlaca"
-                                        id="EstadoPlaca_hidden">
-                                </div>
-
-                                <div>
-                                    <label for="NombreClaseVehiculo"
-                                        class="block mb-1 text-sm font-medium text-gray-600">Clase Vehiculo</label>
-                                    <input type="text" name="NombreClaseVehiculo"
-                                        id="NombreClaseVehiculo" required disabled
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                    <input type="hidden" name="NombreClaseVehiculo"
-                                        id="NombreClaseVehiculo_hidden">
-                                </div>
-
-                                <div>
-                                    <label for="TipoCertificado"
-                                        class="block mb-1 text-sm font-medium text-gray-600">Tipo Certificado</label>
-                                    <input type="text" name="TipoCertificado"
-                                        id="TipoCertificado" required disabled
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                    <input type="hidden" name="TipoCertificado"
-                                        id="TipoCertificado_hidden">
-                                </div>
-
-                                <div>
-                                    <label for="NumeroAseguradora"
-                                        class="block mb-1 text-sm font-medium text-gray-600">Número Aseguradora</label>
-                                    <input type="text" name="NumeroAseguradora"
-                                        id="NumeroAseguradora" required disabled
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                    <input type="hidden" name="NumeroAseguradora"
-                                        id="NumeroAseguradora_hidden">
-                                </div>
-
-
-                            </div>
-                        </div>
                     </div>
                     {{-- ERRORES --}}
                     @if ($errors->any())
@@ -374,13 +379,29 @@
             const companiaSelect = document.getElementById('compania_id');
             const servicioSelect = document.getElementById('servicio_id');
             const seccionOculta = document.getElementById('bloques-complementarios');
+            const datosPlacaSection = document.getElementById('datos-placa-section');
 
             function toggleSecciones() {
                 const companiaSeleccionada = companiaSelect.value !== '';
                 const servicioSeleccionado = servicioSelect.value !== '';
+                const esServicio2 = servicioSelect.value === '2'; // Verifica si el servicio es 2
 
                 if (companiaSeleccionada && servicioSeleccionado) {
                     seccionOculta.style.display = 'block';
+
+                    // Mostrar u ocultar sección de placa según el servicio
+                    datosPlacaSection.style.display = esServicio2 ? 'block' : 'none';
+
+                    // Limpiar campos si no es servicio 2
+                    if (!esServicio2) {
+                        $('#Placa').val('');
+                        $('#FechaInicio').val('');
+                        $('#FechaFin').val('');
+                        $('#EstadoPlaca').val('');
+                        $('#NombreClaseVehiculo').val('');
+                        $('#TipoCertificado').val('');
+                        $('#NumeroAseguradora').val('');
+                    }
                 } else {
                     seccionOculta.style.display = 'none';
                 }
@@ -410,8 +431,10 @@
                                 $('#Placa').val(response.Placa);
                                 $('#Placa_hidden').val(response.Placa);
 
-                                const fechaInicio = response.FechaInicio.split('/').reverse().join('-');
-                                const fechaFin = response.FechaFin.split('/').reverse().join('-');
+                                const fechaInicio = response.FechaInicio.split('/').reverse()
+                                    .join('-');
+                                const fechaFin = response.FechaFin.split('/').reverse().join(
+                                    '-');
 
                                 $('#FechaInicio').val(response.FechaInicio);
                                 $('#FechaInicio_hidden').val(response.FechaInicio);
@@ -423,7 +446,8 @@
                                 $('#EstadoPlaca_hidden').val(response.Estado);
 
                                 $('#NombreClaseVehiculo').val(response.NombreClaseVehiculo);
-                                $('#NombreClaseVehiculo_hidden').val(response.NombreClaseVehiculo);
+                                $('#NombreClaseVehiculo_hidden').val(response
+                                    .NombreClaseVehiculo);
 
                                 $('#TipoCertificado').val(response.TipoCertificado);
                                 $('#TipoCertificado_hidden').val(response.TipoCertificado);
