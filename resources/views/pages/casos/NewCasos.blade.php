@@ -148,7 +148,7 @@
                                     <label for="ubicacion"
                                         class="block mb-1 text-sm font-medium text-gray-600">Ubicación</label>
                                     <input type="text" name="ubicacion" id="ubicacion" required
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase" />
                                 </div>
 
                                 <div>
@@ -177,7 +177,7 @@
                                     <label for="descripcion"
                                         class="block mb-1 text-sm font-medium text-gray-600">Descripción</label>
                                     <textarea name="descripcion" id="descripcion" rows="4" required
-                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase"
                                         placeholder="Describa los detalles del incidente..."></textarea>
                                 </div>
 

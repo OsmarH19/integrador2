@@ -96,18 +96,18 @@
                                                 </button>
 
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->descripcion }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_nombres }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_apellido_paterno }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_apellido_materno }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_tipo_documento }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_numero_documento }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->descripcion }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_nombres }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_apellido_paterno }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_apellido_materno }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_tipo_documento }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_numero_documento }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">
                                                 {{ $caso->creador ? $caso->creador->name : 'Usuario no encontrado' }}
                                             </td>
 
-                                            <td class="whitespace-nowrap px-3 py-2">
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">
                                                 @if ($caso->creador)
                                                     {{ $caso->creador->name }}
                                                 @else
