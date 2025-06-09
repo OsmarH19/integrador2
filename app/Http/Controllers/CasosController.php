@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Illuminate\Support\Facades\File;
 use DB;
-use Illuminate\Support\Facades\Http; // para HTTP client
+use Illuminate\Support\Facades\Http;
 
 class CasosController extends Controller
 {
@@ -60,7 +60,22 @@ class CasosController extends Controller
             $casos->poliza_id = $request->poliza_id;
             $casos->centro_medico_id = $request->centro_medico_id;
             $casos->created_by = Auth::user()->id;
+            \Log::debug('Guardando caso...');
             $casos->save();
+            \Log::debug('Caso guardado con ID: ' . $casos->id);
+
+            // Guardar los datos en la tabla lesionados
+            $lesionado = new Lesionados;
+            \Log::debug('Guardando lesionado...');
+            $lesionado->caso_id = $casos->id;
+            $lesionado->nombres = $request->lesionado_nombres;
+            $lesionado->apellido_paterno = $request->lesionado_apellido_paterno;
+            $lesionado->apellido_materno = $request->lesionado_apellido_materno;
+            $lesionado->tipo_documento = $request->lesionado_tipo_documento;
+            $lesionado->numero_documento = $request->lesionado_numero_documento;
+            $lesionado->save();
+            \Log::debug('Lesionado guardado con ID: ' . $lesionado->id);
+            // dd($lesionado);
 
             DB::commit();
             return back()->withInput()->with('success', 'Solicitud enviada correctamente');

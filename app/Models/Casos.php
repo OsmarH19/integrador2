@@ -59,4 +59,10 @@ class Casos extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function lesionado()
+    {
+        return $this->hasOne(Lesionados::class, 'caso_id');
+    }
+
 }
