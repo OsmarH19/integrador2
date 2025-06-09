@@ -145,9 +145,16 @@
                             </div>
 
                             <div>
-                                <label for="lesionado_apellidos"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Apellidos</label>
-                                <input type="text" name="lesionado_apellidos" id="lesionado_apellidos" required
+                                <label for="lesionado_apellido_paterno"
+                                    class="block mb-1 text-sm font-medium text-gray-600">Apellido Paterno</label>
+                                <input type="text" name="lesionado_apellido_paterno" id="lesionado_apellido_paterno" required
+                                    class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <div>
+                                <label for="lesionado_apellido_materno"
+                                    class="block mb-1 text-sm font-medium text-gray-600">Apellido Materno</label>
+                                <input type="text" name="lesionado_apellido_materno" id="lesionado_apellido_materno" required
                                     class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             </div>
 

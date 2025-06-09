@@ -19,7 +19,8 @@ class Casos extends Model
        'updated_at ',
         //Guardar tambien en el modelo Lesionados
        'lesionado_nombres',
-       'lesionado_apellidos',
+       'lesionado_apellido_paterno',
+       'lesionado_apellido_materno',
        'lesionado_tipo_documento',
        'lesionado_numero_documento',
        //Select modelo Polizas

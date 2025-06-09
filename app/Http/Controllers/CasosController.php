@@ -52,7 +52,8 @@ class CasosController extends Controller
         $casos->compania_id = $request->compania_id;
         $casos->servicio_id = $request->servicio_id;
         $casos->lesionado_nombres = $request->lesionado_nombres;
-        $casos->lesionado_apellidos = $request->lesionado_apellidos;
+        $casos->lesionado_apellido_paterno = $request->lesionado_apellido_paterno;
+        $casos->lesionado_apellidos_materno = $request->lesionado_apellidos_materno;
         $casos->lesionado_tipo_documento = $request->lesionado_tipo_documento;
         $casos->lesionado_numero_documento = $request->lesionado_numero_documento;
         $casos->poliza_id = $request->poliza_id;

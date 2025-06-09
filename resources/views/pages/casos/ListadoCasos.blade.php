@@ -63,7 +63,11 @@
                                         </th>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                                            Apellido
+                                            Apellido Paterno
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Apellido Materno
                                         </th>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
@@ -94,7 +98,7 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->descripcion }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_nombres }} {{ $caso->lesionado_apellidos }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_nombres }} {{ $caso->lesionado_apellido_paterno }} {{ $caso->lesionado_apellido_materno }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->ubicacion }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ ucfirst($caso->estado) }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->created_at }}</td>
