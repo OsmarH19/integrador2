@@ -102,6 +102,7 @@
                                     class="block mb-1 text-sm font-medium text-gray-600">Nombres</label>
                                 <input type="text" name="lesionado_nombres" id="lesionado_nombres" required disabled
                                     class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <input type="hidden" name="lesionado_nombres" id="lesionado_nombres_hidden">
                             </div>
 
                             <div>
@@ -110,6 +111,10 @@
                                 <input type="text" name="lesionado_apellido_paterno" id="lesionado_apellido_paterno"
                                     required disabled
                                     class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <input type="hidden" name="lesionado_apellido_paterno"
+                                    id="lesionado_apellido_paterno_hidden">
+                                <input type="hidden" name="lesionado_apellido_materno"
+                                    id="lesionado_apellido_materno_hidden">
                             </div>
 
                             <div>
@@ -203,8 +208,7 @@
             </div>
         </div>
 
-        <div id="spinner-overlay"
-            class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div id="spinner-overlay" class="fixed inset-0 flex items-center justify-center z-50 hidden">
             <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
 
@@ -238,8 +242,14 @@
                         success: function(response) {
                             if (response.success) {
                                 $('#lesionado_nombres').val(response.nombres);
+                                $('#lesionado_nombres_hidden').val(response.nombres);
+
                                 $('#lesionado_apellido_paterno').val(response.apellido_paterno);
+                                $('#lesionado_apellido_paterno_hidden').val(response.apellido_paterno);
+
                                 $('#lesionado_apellido_materno').val(response.apellido_materno);
+                                $('#lesionado_apellido_materno_hidden').val(response.apellido_materno);
+
                             } else {
                                 alert('No se encontró información para el DNI ingresado.');
                                 $('#lesionado_nombres').val('');

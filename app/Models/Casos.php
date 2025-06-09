@@ -16,17 +16,14 @@ class Casos extends Model
        'servicio_id',
        'estado',
        'created_at',
+       'created_by',
        'updated_at ',
-        //Guardar tambien en el modelo Lesionados
        'lesionado_nombres',
        'lesionado_apellido_paterno',
        'lesionado_apellido_materno',
        'lesionado_tipo_documento',
        'lesionado_numero_documento',
-       //Select modelo Polizas
-       //Guardar tambien en el modelo Polizas
        'poliza_id',
-       //Select modelo CentrosMedicos
        'centro_medico_id',
     ];
 
@@ -54,5 +51,10 @@ class Casos extends Model
     public function centroMedico()
     {
         return $this->belongsTo(CentrosMedicos::class, 'centro_medico_id');
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'created_by');
     }
 }

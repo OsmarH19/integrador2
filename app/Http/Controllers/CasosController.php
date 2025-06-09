@@ -59,6 +59,7 @@ class CasosController extends Controller
             $casos->lesionado_numero_documento = $request->lesionado_numero_documento;
             $casos->poliza_id = $request->poliza_id;
             $casos->centro_medico_id = $request->centro_medico_id;
+            $casos->created_by = Auth::user()->id;
             $casos->save();
 
             DB::commit();

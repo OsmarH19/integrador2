@@ -98,10 +98,12 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ $caso->descripcion }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_nombres }} {{ $caso->lesionado_apellido_paterno }} {{ $caso->lesionado_apellido_materno }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->ubicacion }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ ucfirst($caso->estado) }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->created_at }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_nombres }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_apellido_paterno }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_apellido_materno }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_tipo_documento }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->lesionado_numero_documento }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2">{{ $caso->created_by }}</td>
                                             <td class="whitespace-nowrap px-3 py-2">
                                                 @if ($caso->creador)
                                                     {{ $caso->creador->name }}
