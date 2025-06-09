@@ -36,13 +36,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::get('/', [PagesController::class, 'dashboardsCrmAnalytics'])->name('index');
 
+    //API
+    Route::post('/consulta-dni', [CasosController::class, 'consultaDni'])->name('consulta.dni');
+
     // PERFILs
     Route::get('/perfil', [PerfilController::class, 'formsLayoutV5'])->name('perfil');
     Route::put('/profile/update', [PerfilController::class, 'updateProfile'])->name('profile.update');
 
     // OPERACIONES
     Route::get('/casos', [CasosController::class, 'DatosFormulario'])->name('layouts/casos');
-    Route::post('/casos', [CasosController::class, 'NewCasos'])->name('casos/guardar');
+    Route::post('/casos', [CasosController::class, 'NewCasos'])->name('casos.store');
     Route::get('/ListadoCasos', [CasosController::class, 'listadoCasos'])->name('layouts/Registroscasos');
 
 

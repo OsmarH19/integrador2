@@ -33,7 +33,7 @@
             <div class="bg-white shadow-xl rounded-2xl p-8 space-y-8">
                 <h2 class="text-3xl font-bold text-gray-800">Registrar Nuevo Caso</h2>
 
-                <form action="{{ route('casos/guardar') }}" method="POST" class="space-y-10">
+                <form action="{{ route('casos.store') }}" method="POST" class="space-y-10">
                     @csrf
 
                     {{-- DATOS DEL CASO --}}
@@ -147,14 +147,16 @@
                             <div>
                                 <label for="lesionado_apellido_paterno"
                                     class="block mb-1 text-sm font-medium text-gray-600">Apellido Paterno</label>
-                                <input type="text" name="lesionado_apellido_paterno" id="lesionado_apellido_paterno" required
+                                <input type="text" name="lesionado_apellido_paterno" id="lesionado_apellido_paterno"
+                                    required
                                     class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             </div>
 
                             <div>
                                 <label for="lesionado_apellido_materno"
                                     class="block mb-1 text-sm font-medium text-gray-600">Apellido Materno</label>
-                                <input type="text" name="lesionado_apellido_materno" id="lesionado_apellido_materno" required
+                                <input type="text" name="lesionado_apellido_materno" id="lesionado_apellido_materno"
+                                    required
                                     class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             </div>
 
@@ -197,6 +199,42 @@
                 width: '100%'
             });
 
+        });
+
+
+        $(document).ready(function() {
+            $('#lesionado_numero_documento').on('blur', function() {
+                var dni = $(this).val().trim();
+
+                if (dni.length === 8) {
+                    $.ajax({
+                        url: '{{ route('consulta.dni') }}',
+                        method: 'POST',
+                        data: {
+                            dni: dni,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                $('#lesionado_nombres').val(response.nombres);
+                                $('#lesionado_apellido_paterno').val(response.apellido_paterno);
+                                $('#lesionado_apellido_materno').val(response.apellido_materno);
+                            } else {
+                                alert('No se encontró información para el DNI ingresado.');
+                                $('#lesionado_nombres').val('');
+                                $('#lesionado_apellido_paterno').val('');
+                                $('#lesionado_apellido_materno').val('');
+                            }
+                        },
+                        error: function() {
+                            alert('Error al consultar el DNI.');
+                            $('#lesionado_nombres').val('');
+                            $('#lesionado_apellido_paterno').val('');
+                            $('#lesionado_apellido_materno').val('');
+                        }
+                    });
+                }
+            });
         });
     </script>
 
