@@ -19,7 +19,7 @@ class Casos extends Model
        'estado',
        'created_at',
        'created_by',
-       'updated_at ',
+       'updated_at',
        'lesionado_nombres',
        'lesionado_apellido_paterno',
        'lesionado_apellido_materno',
@@ -27,9 +27,15 @@ class Casos extends Model
        'lesionado_numero_documento',
        'poliza_id',
        'centro_medico_id',
+       'Placa',
+       'FechaInicio',
+       'FechaFin',
+       'EstadoPlaca',
+       'NombreClaseVehiculo',
+       'TipoCertificado',
+       'NumeroAseguradora',
     ];
 
-    // En el modelo Casos.php
     public function compania()
     {
         return $this->belongsTo(CatDatosMaestro::class, 'compania_id');

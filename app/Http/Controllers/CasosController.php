@@ -59,6 +59,13 @@ class CasosController extends Controller
             $casos->lesionado_numero_documento = $request->lesionado_numero_documento;
             $casos->poliza_id = $request->poliza_id;
             $casos->centro_medico_id = $request->centro_medico_id;
+            $casos->Placa = $request->Placa;
+            $casos->FechaInicio = Carbon::createFromFormat('d/m/Y', $request->FechaInicio)->format('Y-m-d');
+            $casos->FechaFin = Carbon::createFromFormat('d/m/Y', $request->FechaFin)->format('Y-m-d');
+            $casos->EstadoPlaca = $request->EstadoPlaca;
+            $casos->NombreClaseVehiculo = $request->NombreClaseVehiculo;
+            $casos->TipoCertificado = $request->TipoCertificado;
+            $casos->NumeroAseguradora = $request->NumeroAseguradora;
             $casos->created_by = Auth::user()->id;
             \Log::debug('Guardando caso...');
             $casos->save();
@@ -99,7 +106,6 @@ class CasosController extends Controller
                     'Authorization' => "Bearer $token",
                     'Accept' => 'application/json',
                 ],
-                // ACA SE SALTO LA VALIDACION SSL
                 'verify' => false,
             ]);
 
@@ -119,5 +125,49 @@ class CasosController extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function consultaPlaca(Request $request)
+    {
+        $placa = $request->Placa;
+        $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MTQ5Ng.SLSuO2UYeZI0KsDGTSoz-yNGPN9HbHxha4T2FPglIFY';
+
+        try {
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('GET', "https://quertium.com/api/v1/apeseg/soat/$placa", [
+                'headers' => [
+                    'Authorization' => "Bearer $token",
+                    'Accept' => 'application/json',
+                ],
+                'verify' => false,
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            if (isset($data['Placa'], $data['FechaInicio'], $data['FechaFin'])) {
+                return response()->json([
+                    'success' => true,
+                    'Placa' => trim($data['Placa']),
+                    'FechaInicio' => $data['FechaInicio'],
+                    'FechaFin' => $data['FechaFin'],
+                    'Estado' => $data['Estado'],
+                    'NombreClaseVehiculo' => $data['NombreClaseVehiculo'],
+                    'TipoCertificado' => $data['TipoCertificado'],
+                    'NumeroAseguradora' => $data['NumeroAseguradora'],
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Datos incompletos o placa no válida.'
+                ], 404);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 
 }

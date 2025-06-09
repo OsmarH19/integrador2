@@ -1,6 +1,5 @@
 <x-app-layout title="Nuevo Caso" is-header-blur="true">
     <style>
-        /* Estilo para que Select2 se vea como Tailwind */
         .select2-container .select2-selection--single {
             height: 2.5rem;
             padding: 0.5rem 0.75rem;
@@ -183,6 +182,81 @@
 
                             </div>
                         </div>
+
+                        {{-- DATOS PLACA --}}
+                        <div class="md:mt-5">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos de Placa</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+                                <div>
+                                    <label for="Placa" class="block mb-1 text-sm font-medium text-gray-600">Número
+                                        de Placa</label>
+                                    <input type="text" name="Placa" id="Placa"
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Seleccione primero el tipo de documento" />
+                                </div>
+
+                                <div>
+                                    <label for="FechaInicio"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Fecha Inicio</label>
+                                    <input type="text" name="FechaInicio" id="FechaInicio" disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="FechaInicio" id="FechaInicio_hidden">
+                                </div>
+
+                                <div>
+                                    <label for="FechaFin"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Fecha Fin</label>
+                                    <input type="text" name="FechaFin"
+                                        id="FechaFin" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="FechaFin"
+                                        id="FechaFin_hidden">
+                                </div>
+
+                                <div>
+                                    <label for="EstadoPlaca"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Estado Placa</label>
+                                    <input type="text" name="EstadoPlaca"
+                                        id="EstadoPlaca" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="EstadoPlaca"
+                                        id="EstadoPlaca_hidden">
+                                </div>
+
+                                <div>
+                                    <label for="NombreClaseVehiculo"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Clase Vehiculo</label>
+                                    <input type="text" name="NombreClaseVehiculo"
+                                        id="NombreClaseVehiculo" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="NombreClaseVehiculo"
+                                        id="NombreClaseVehiculo_hidden">
+                                </div>
+
+                                <div>
+                                    <label for="TipoCertificado"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Tipo Certificado</label>
+                                    <input type="text" name="TipoCertificado"
+                                        id="TipoCertificado" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="TipoCertificado"
+                                        id="TipoCertificado_hidden">
+                                </div>
+
+                                <div>
+                                    <label for="NumeroAseguradora"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Número Aseguradora</label>
+                                    <input type="text" name="NumeroAseguradora"
+                                        id="NumeroAseguradora" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="NumeroAseguradora"
+                                        id="NumeroAseguradora_hidden">
+                                </div>
+
+
+                            </div>
+                        </div>
                     </div>
                     {{-- ERRORES --}}
                     @if ($errors->any())
@@ -225,7 +299,6 @@
             });
 
         });
-
 
         $(document).ready(function() {
             $('#lesionado_numero_documento').on('blur', function() {
@@ -315,6 +388,69 @@
 
             companiaSelect.addEventListener('change', toggleSecciones);
             servicioSelect.addEventListener('change', toggleSecciones);
+        });
+
+        $(document).ready(function() {
+            $('#Placa').on('blur', function() {
+                var Placa = $(this).val().trim();
+
+                if (Placa.length === 6) {
+                    $.ajax({
+                        url: '{{ route('consulta.placa') }}',
+                        method: 'POST',
+                        data: {
+                            Placa: Placa,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        beforeSend: function() {
+                            $('#spinner-overlay').removeClass('hidden');
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                $('#Placa').val(response.Placa);
+                                $('#Placa_hidden').val(response.Placa);
+
+                                const fechaInicio = response.FechaInicio.split('/').reverse().join('-');
+                                const fechaFin = response.FechaFin.split('/').reverse().join('-');
+
+                                $('#FechaInicio').val(response.FechaInicio);
+                                $('#FechaInicio_hidden').val(response.FechaInicio);
+
+                                $('#FechaFin').val(response.FechaFin);
+                                $('#FechaFin_hidden').val(response.FechaFin);
+
+                                $('#EstadoPlaca').val(response.Estado);
+                                $('#EstadoPlaca_hidden').val(response.Estado);
+
+                                $('#NombreClaseVehiculo').val(response.NombreClaseVehiculo);
+                                $('#NombreClaseVehiculo_hidden').val(response.NombreClaseVehiculo);
+
+                                $('#TipoCertificado').val(response.TipoCertificado);
+                                $('#TipoCertificado_hidden').val(response.TipoCertificado);
+
+                                $('#NumeroAseguradora').val(response.NumeroAseguradora);
+                                $('#NumeroAseguradora_hidden').val(response.NumeroAseguradora);
+
+                            } else {
+                                alert('No se encontró información para la Placa ingresada.');
+                                $('#Placa').val('');
+                                $('#FechaInicio').val('');
+                                $('#FechaFin').val('');
+                            }
+                        },
+                        error: function() {
+                            alert('Error al consultar la Placa.');
+                            $('#Placa').val('');
+                            $('#FechaInicio').val('');
+                            $('#FechaFin').val('');
+                        },
+                        complete: function() {
+                            $('#spinner-overlay').addClass('hidden');
+                        }
+                    });
+
+                }
+            });
         });
     </script>
 

@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     //API
     Route::post('/consulta-dni', [CasosController::class, 'consultaDni'])->name('consulta.dni');
+    Route::post('/consulta-placa', [CasosController::class, 'consultaPlaca'])->name('consulta.placa');
 
     // PERFILs
     Route::get('/perfil', [PerfilController::class, 'formsLayoutV5'])->name('perfil');
