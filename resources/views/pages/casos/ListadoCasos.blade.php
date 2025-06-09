@@ -51,11 +51,19 @@
                                         </th>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Compania
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            N° Placa
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                                             Descipción
                                         </th>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                                            Fecha
+                                            Fecha Incidente
                                         </th>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
@@ -91,17 +99,19 @@
                                                 <button
 
                                                     class="btn size-7 p-0 text-info hover:bg-info/20"
-                                                    title="Editar ente">
+                                                    title="Editar Caso">
                                                     <i class="fa fa-edit text-xs"></i>
                                                 </button>
 
                                             </td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->compania->nombre ?? 'N/A' }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->Placa ?? 'N/A'}}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->descripcion }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_nombres }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_apellido_paterno }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_apellido_materno }}</td>
-                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_tipo_documento }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->tipoDocumento->nombre ?? 'N/A'}}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->lesionado_numero_documento }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">
                                                 {{ $caso->creador ? $caso->creador->name : 'Usuario no encontrado' }}

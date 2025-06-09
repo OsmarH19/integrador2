@@ -24,7 +24,7 @@ class CasosController extends Controller
 {
     public function listadoCasos()
     {
-        $casos = Casos::orderBy('created_at', 'desc')->get();
+        $casos = Casos::orderBy('id', 'ASC')->get();
         return view('pages.casos.ListadoCasos', compact('casos'));
     }
 
