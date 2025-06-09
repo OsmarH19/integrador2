@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/desactivar-empresa/{id}', [MantenimientoController::class, 'desactivarEmpresa'])->name('desactivar.empresa');
     Route::post('/activar-empresa/{id}', [MantenimientoController::class, 'activarEmpresa'])->name('activar.empresa');
 
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     // PLANTILLA
     Route::get('/elements/avatar', [PagesController::class, 'elementsAvatar'])->name('elements/avatar');
