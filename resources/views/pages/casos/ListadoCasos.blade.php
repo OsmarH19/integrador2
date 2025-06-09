@@ -47,6 +47,10 @@
                                     <tr>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Ver
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                                             Descipción
                                         </th>
                                         <th
@@ -81,7 +85,7 @@
                                         <tr class="hover:bg-slate-50 dark:hover:bg-navy-600">
                                             <td class="whitespace-nowrap px-3 py-2">
                                                 <button
-                                                    x-on:click="window.location.href='{{ route('layouts/EditarRegistrosEntes', $caso->enteID) }}'"
+
                                                     class="btn size-7 p-0 text-info hover:bg-info/20"
                                                     title="Editar ente">
                                                     <i class="fa fa-edit text-xs"></i>

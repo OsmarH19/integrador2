@@ -42,11 +42,9 @@ Route::middleware('auth')->group(function () {
 
     // OPERACIONES
     Route::get('/casos', [CasosController::class, 'DatosFormulario'])->name('layouts/casos');
-    Route::post('/casos', [CasosController::class, 'guardarEnte'])->name('casos/guardar');
+    Route::post('/casos', [CasosController::class, 'NewCasos'])->name('casos/guardar');
     Route::get('/ListadoCasos', [CasosController::class, 'listadoCasos'])->name('layouts/Registroscasos');
-    Route::get('/EditarRegistrosEntes/{id}', [OperacionesController::class, 'EditarRegistrosEntes'])->name('layouts/EditarRegistrosEntes');
-    Route::put('/entes/{ente}/actualizar', [OperacionesController::class, 'ActualizarRegistroEnte'])->name('entes.actualizar');
-    Route::post('/entes/{ente}/actualizar-direccion', [OperacionesController::class, 'actualizarDireccion'])->name('entes.actualizar-direccion');
+
 
     // MANTENIMIENTO
     Route::get('/apps/mantenimiento', [MantenimientoController::class, 'appsMantenimiento'])->name('apps/mantenimiento');
