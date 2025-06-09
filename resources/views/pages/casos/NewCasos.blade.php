@@ -69,118 +69,121 @@
 
                         </div>
                     </div>
+                    <div id="bloques-complementarios" style="display: none;">
+                        {{-- DATOS DEL LESIONADO --}}
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos del Lesionado</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 
-                    {{-- DATOS DEL LESIONADO --}}
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Datos del Lesionado</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                <!-- Para tipo de documento -->
+                                <div>
+                                    <label for="lesionado_tipo_documento"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Tipo de Documento</label>
+                                    <select name="lesionado_tipo_documento" id="lesionado_tipo_documento" required
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="" disabled selected>Seleccione un tipo de documento
+                                        </option>
+                                        @foreach ($tipoidentificacion as $item)
+                                            <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                            <!-- Para tipo de documento -->
-                            <div>
-                                <label for="lesionado_tipo_documento"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Tipo de Documento</label>
-                                <select name="lesionado_tipo_documento" id="lesionado_tipo_documento" required
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option value="" disabled selected>Seleccione un tipo de documento</option>
-                                    @foreach ($tipoidentificacion as $item)
-                                        <option value="{{ $item->codigo }}">{{ $item->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                <div>
+                                    <label for="lesionado_numero_documento"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Número de Documento</label>
+                                    <input type="text" name="lesionado_numero_documento"
+                                        id="lesionado_numero_documento" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Seleccione primero el tipo de documento" />
+                                </div>
+
+                                <div>
+                                    <label for="lesionado_nombres"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Nombres</label>
+                                    <input type="text" name="lesionado_nombres" id="lesionado_nombres" required
+                                        disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="lesionado_nombres" id="lesionado_nombres_hidden">
+                                </div>
+
+                                <div>
+                                    <label for="lesionado_apellido_paterno"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Apellido Paterno</label>
+                                    <input type="text" name="lesionado_apellido_paterno"
+                                        id="lesionado_apellido_paterno" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="hidden" name="lesionado_apellido_paterno"
+                                        id="lesionado_apellido_paterno_hidden">
+                                    <input type="hidden" name="lesionado_apellido_materno"
+                                        id="lesionado_apellido_materno_hidden">
+                                </div>
+
+                                <div>
+                                    <label for="lesionado_apellido_materno"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Apellido Materno</label>
+                                    <input type="text" name="lesionado_apellido_materno"
+                                        id="lesionado_apellido_materno" required disabled
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                </div>
+
+
                             </div>
+                        </div>
 
-                            <div>
-                                <label for="lesionado_numero_documento"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Número de Documento</label>
-                                <input type="text" name="lesionado_numero_documento" id="lesionado_numero_documento"
-                                    required disabled
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Seleccione primero el tipo de documento" />
+                        {{-- DATOS DEL CASO --}}
+                        <div class="md:mt-5">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Información del Caso</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+                                <div>
+                                    <label for="fecha_incidente"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Fecha
+                                        del Incidente</label>
+                                    <input type="date" name="fecha_incidente" id="fecha_incidente" required
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                </div>
+
+                                <div>
+                                    <label for="ubicacion"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Ubicación</label>
+                                    <input type="text" name="ubicacion" id="ubicacion" required
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                </div>
+
+                                <div>
+                                    <label for="poliza_id"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Póliza</label>
+                                    <select name="poliza_id" id="poliza_id" class="select2 ..." required>
+                                        <option value="" disabled selected>Seleccione una póliza</option>
+                                        @foreach (\App\Models\Polizas::all() as $poliza)
+                                            <option value="{{ $poliza->id }}">{{ $poliza->numero_poliza }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="centro_medico_id"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Centro Médico</label>
+                                    <select name="centro_medico_id" id="centro_medico_id" class="select2 ..." required>
+                                        <option value="" disabled selected>Seleccione una póliza</option>
+                                        @foreach (\App\Models\CentrosMedicos::all() as $centro)
+                                            <option value="{{ $centro->id }}">{{ $centro->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="md:col-span-4">
+                                    <label for="descripcion"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Descripción</label>
+                                    <textarea name="descripcion" id="descripcion" rows="4" required
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Describa los detalles del incidente..."></textarea>
+                                </div>
+
                             </div>
-
-                            <div>
-                                <label for="lesionado_nombres"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Nombres</label>
-                                <input type="text" name="lesionado_nombres" id="lesionado_nombres" required disabled
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                <input type="hidden" name="lesionado_nombres" id="lesionado_nombres_hidden">
-                            </div>
-
-                            <div>
-                                <label for="lesionado_apellido_paterno"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Apellido Paterno</label>
-                                <input type="text" name="lesionado_apellido_paterno" id="lesionado_apellido_paterno"
-                                    required disabled
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                <input type="hidden" name="lesionado_apellido_paterno"
-                                    id="lesionado_apellido_paterno_hidden">
-                                <input type="hidden" name="lesionado_apellido_materno"
-                                    id="lesionado_apellido_materno_hidden">
-                            </div>
-
-                            <div>
-                                <label for="lesionado_apellido_materno"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Apellido Materno</label>
-                                <input type="text" name="lesionado_apellido_materno" id="lesionado_apellido_materno"
-                                    required disabled
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm bg-gray-50 text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div>
-
-
                         </div>
                     </div>
-
-                    {{-- DATOS DEL CASO --}}
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Información del Caso</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-
-                            <div>
-                                <label for="fecha_incidente" class="block mb-1 text-sm font-medium text-gray-600">Fecha
-                                    del Incidente</label>
-                                <input type="date" name="fecha_incidente" id="fecha_incidente" required
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div>
-
-                            <div>
-                                <label for="ubicacion"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Ubicación</label>
-                                <input type="text" name="ubicacion" id="ubicacion" required
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div>
-
-                            <div>
-                                <label for="poliza_id"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Póliza</label>
-                                <select name="poliza_id" id="poliza_id" class="select2 ..." required>
-                                    <option value="" disabled selected>Seleccione una póliza</option>
-                                    @foreach (\App\Models\Polizas::all() as $poliza)
-                                        <option value="{{ $poliza->id }}">{{ $poliza->numero_poliza }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="centro_medico_id"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Centro Médico</label>
-                                <select name="centro_medico_id" id="centro_medico_id" class="select2 ..." required>
-                                    <option value="" disabled selected>Seleccione una póliza</option>
-                                    @foreach (\App\Models\CentrosMedicos::all() as $centro)
-                                        <option value="{{ $centro->id }}">{{ $centro->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="md:col-span-4">
-                                <label for="descripcion"
-                                    class="block mb-1 text-sm font-medium text-gray-600">Descripción</label>
-                                <textarea name="descripcion" id="descripcion" rows="4" required
-                                    class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Describa los detalles del incidente..."></textarea>
-                            </div>
-
-                        </div>
-                    </div>
-
                     {{-- ERRORES --}}
                     @if ($errors->any())
                         <div class="p-4 bg-red-50 border border-red-400 text-red-700 rounded-lg">
@@ -245,10 +248,12 @@
                                 $('#lesionado_nombres_hidden').val(response.nombres);
 
                                 $('#lesionado_apellido_paterno').val(response.apellido_paterno);
-                                $('#lesionado_apellido_paterno_hidden').val(response.apellido_paterno);
+                                $('#lesionado_apellido_paterno_hidden').val(response
+                                    .apellido_paterno);
 
                                 $('#lesionado_apellido_materno').val(response.apellido_materno);
-                                $('#lesionado_apellido_materno_hidden').val(response.apellido_materno);
+                                $('#lesionado_apellido_materno_hidden').val(response
+                                    .apellido_materno);
 
                             } else {
                                 alert('No se encontró información para el DNI ingresado.');
@@ -290,6 +295,26 @@
                     numeroDocumento.placeholder = 'Seleccione primero el tipo de documento';
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const companiaSelect = document.getElementById('compania_id');
+            const servicioSelect = document.getElementById('servicio_id');
+            const seccionOculta = document.getElementById('bloques-complementarios');
+
+            function toggleSecciones() {
+                const companiaSeleccionada = companiaSelect.value !== '';
+                const servicioSeleccionado = servicioSelect.value !== '';
+
+                if (companiaSeleccionada && servicioSeleccionado) {
+                    seccionOculta.style.display = 'block';
+                } else {
+                    seccionOculta.style.display = 'none';
+                }
+            }
+
+            companiaSelect.addEventListener('change', toggleSecciones);
+            servicioSelect.addEventListener('change', toggleSecciones);
         });
     </script>
 
