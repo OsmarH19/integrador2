@@ -244,7 +244,7 @@
                                         class="block mb-1 text-sm font-medium text-gray-600">Centro Médico</label>
                                     <select name="centro_medico_id" id="centro_medico_id" class="select2 ..."
                                         required>
-                                        <option value="" disabled selected>Seleccione una póliza</option>
+                                        <option value="" disabled selected>Seleccione un centro médico</option>
                                         @foreach (\App\Models\CentrosMedicos::all() as $centro)
                                             <option value="{{ $centro->id }}">{{ $centro->nombre }}</option>
                                         @endforeach
