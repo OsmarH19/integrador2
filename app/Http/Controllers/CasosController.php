@@ -19,6 +19,7 @@ use Auth;
 use Illuminate\Support\Facades\File;
 use DB;
 use Illuminate\Support\Facades\Http;
+use PDF;
 
 class CasosController extends Controller
 {
@@ -38,6 +39,70 @@ class CasosController extends Controller
         return view( 'pages.casos.NewCasos', compact( 'catpais','compañia' , 'servicio', 'tipoidentificacion' ) );
     }
 
+    // public function NewCasos(Request $request)
+    // {
+    //     DB::beginTransaction();
+
+    //     try {
+    //         \Log::debug('Datos recibidos:', $request->all());
+
+    //         $casos = new Casos;
+    //         $casos->estado = 0;
+    //         $casos->descripcion = $request->descripcion;
+    //         $casos->fecha_incidente = $request->fecha_incidente;
+    //         $casos->ubicacion = $request->ubicacion;
+    //         $casos->compania_id = $request->compania_id;
+    //         $casos->servicio_id = $request->servicio_id;
+    //         $casos->lesionado_nombres = $request->lesionado_nombres;
+    //         $casos->lesionado_apellido_paterno = $request->lesionado_apellido_paterno;
+    //         $casos->lesionado_apellido_materno = $request->lesionado_apellido_materno;
+    //         $casos->lesionado_tipo_documento = $request->lesionado_tipo_documento;
+    //         $casos->lesionado_numero_documento = $request->lesionado_numero_documento;
+    //         $casos->poliza_id = $request->poliza_id;
+    //         $casos->centro_medico_id = $request->centro_medico_id;
+
+    //         if ($request->has('Placa') && $request->Placa) {
+    //             $casos->Placa = $request->Placa;
+
+    //             if ($request->FechaInicio) {
+    //                 $casos->FechaInicio = Carbon::createFromFormat('d/m/Y', $request->FechaInicio)->format('Y-m-d');
+    //             }
+
+    //             if ($request->FechaFin) {
+    //                 $casos->FechaFin = Carbon::createFromFormat('d/m/Y', $request->FechaFin)->format('Y-m-d');
+    //             }
+
+    //             $casos->EstadoPlaca = $request->EstadoPlaca;
+    //             $casos->NombreClaseVehiculo = $request->NombreClaseVehiculo;
+    //             $casos->TipoCertificado = $request->TipoCertificado;
+    //             $casos->NumeroAseguradora = $request->NumeroAseguradora;
+    //         }
+
+    //         $casos->created_by = Auth::user()->id;
+    //         \Log::debug('Guardando caso...');
+    //         $casos->save();
+    //         \Log::debug('Caso guardado con ID: ' . $casos->id);
+
+    //         // Guardar los datos en la tabla lesionados
+    //         $lesionado = new Lesionados;
+    //         \Log::debug('Guardando lesionado...');
+    //         $lesionado->caso_id = $casos->id;
+    //         $lesionado->nombres = $request->lesionado_nombres;
+    //         $lesionado->apellido_paterno = $request->lesionado_apellido_paterno;
+    //         $lesionado->apellido_materno = $request->lesionado_apellido_materno;
+    //         $lesionado->tipo_documento = $request->lesionado_tipo_documento;
+    //         $lesionado->numero_documento = $request->lesionado_numero_documento;
+    //         $lesionado->save();
+    //         \Log::debug('Lesionado guardado con ID: ' . $lesionado->id);
+
+    //         DB::commit();
+    //         return back()->withInput()->with('success', 'Solicitud enviada correctamente');
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //         \Log::error('Error al guardar el caso: ' . $e->getMessage());
+    //         return back()->withInput()->with('error', 'Ocurrió un error al guardar el caso.');
+    //     }
+    // }
     public function NewCasos(Request $request)
     {
         DB::beginTransaction();
@@ -78,13 +143,10 @@ class CasosController extends Controller
             }
 
             $casos->created_by = Auth::user()->id;
-            \Log::debug('Guardando caso...');
             $casos->save();
-            \Log::debug('Caso guardado con ID: ' . $casos->id);
 
             // Guardar los datos en la tabla lesionados
             $lesionado = new Lesionados;
-            \Log::debug('Guardando lesionado...');
             $lesionado->caso_id = $casos->id;
             $lesionado->nombres = $request->lesionado_nombres;
             $lesionado->apellido_paterno = $request->lesionado_apellido_paterno;
@@ -92,15 +154,45 @@ class CasosController extends Controller
             $lesionado->tipo_documento = $request->lesionado_tipo_documento;
             $lesionado->numero_documento = $request->lesionado_numero_documento;
             $lesionado->save();
-            \Log::debug('Lesionado guardado con ID: ' . $lesionado->id);
+
+            // Generar el PDF
+            $casoCompleto = Casos::with(['compania', 'servicio', 'poliza', 'centroMedico', 'tipoDocumento'])->find($casos->id);
+
+            $pdf = PDF::loadView('casos.pdf', [
+                'caso' => $casoCompleto
+            ]);
+
+            // Guardar el PDF en storage
+            $filename = 'caso_' . str_pad($casos->id, 6, '0', STR_PAD_LEFT) . '.pdf';
+            $pdfPath = 'pdfs/casos/' . $filename;
+            \Storage::put($pdfPath, $pdf->output());
+
+            // Actualizar el caso con la ruta del PDF
+            $casos->pdf_path = $pdfPath;
+            $casos->save();
 
             DB::commit();
-            return back()->withInput()->with('success', 'Solicitud enviada correctamente');
+
+            return redirect()->route('casos.listado')
+                ->with('success', 'Caso creado correctamente')
+                ->with('pdf_url', route('casos.download', $casos->id));
+
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error('Error al guardar el caso: ' . $e->getMessage());
             return back()->withInput()->with('error', 'Ocurrió un error al guardar el caso.');
         }
+    }
+
+    public function downloadPdf($id)
+    {
+        $caso = Casos::findOrFail($id);
+
+        if (!Storage::exists($caso->pdf_path)) {
+            abort(404);
+        }
+
+        return Storage::download($caso->pdf_path);
     }
 
     public function consultaDni(Request $request)

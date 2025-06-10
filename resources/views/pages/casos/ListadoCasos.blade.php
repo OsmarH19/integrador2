@@ -97,12 +97,10 @@
                                         <tr class="hover:bg-slate-50 dark:hover:bg-navy-600">
                                             <td class="whitespace-nowrap px-3 py-2">
                                                 <button
-
                                                     class="btn size-7 p-0 text-info hover:bg-info/20"
-                                                    title="Editar Caso">
-                                                    <i class="fa fa-edit text-xs"></i>
+                                                    title="Ver PDF">
+                                                    <i class="fa-regular fa-file-pdf text-xs"></i>
                                                 </button>
-
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->compania->nombre ?? 'N/A' }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->Placa ?? 'N/A'}}</td>

@@ -34,6 +34,7 @@ class Casos extends Model
        'NombreClaseVehiculo',
        'TipoCertificado',
        'NumeroAseguradora',
+       'pdf_path',
     ];
 
     public function compania()
