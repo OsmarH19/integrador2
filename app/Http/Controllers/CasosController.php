@@ -165,7 +165,8 @@ class CasosController extends Controller
             // Guardar el PDF en storage
             $filename = 'caso_' . str_pad($casos->id, 6, '0', STR_PAD_LEFT) . '.pdf';
             $pdfPath = 'pdfs/casos/' . $filename;
-            \Storage::put($pdfPath, $pdf->output());
+            \Storage::disk('public')->put($pdfPath, $pdf->output());
+
 
             // Actualizar el caso con la ruta del PDF
             $casos->pdf_path = $pdfPath;
