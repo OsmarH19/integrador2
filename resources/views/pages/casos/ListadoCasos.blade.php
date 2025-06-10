@@ -96,11 +96,22 @@
                                     @foreach ($casos as $caso)
                                         <tr class="hover:bg-slate-50 dark:hover:bg-navy-600">
                                             <td class="whitespace-nowrap px-3 py-2">
-                                                <button
-                                                    class="btn size-7 p-0 text-info hover:bg-info/20"
-                                                    title="Ver PDF">
+                                                @if($caso->pdf_path)
+                                                <a href="{{ ('storage/app/pdfs/casos/' . basename($caso->pdf_path)) }}"
+                                                   data-fancybox="pdf-preview"
+                                                   data-type="iframe"
+                                                   data-preload="false"
+                                                   data-width="800"
+                                                   data-height="600"
+                                                   class="btn size-7 p-0 text-info hover:bg-info/20"
+                                                   title="Ver PDF">
+                                                    <i class="fa-regular fa-file-pdf text-xs"></i>
+                                                </a>
+                                                @else
+                                                <button class="btn size-7 p-0 text-gray-400 hover:bg-gray-100/20" title="PDF no disponible" disabled>
                                                     <i class="fa-regular fa-file-pdf text-xs"></i>
                                                 </button>
+                                                @endif
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->compania->nombre ?? 'N/A' }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->Placa ?? 'N/A'}}</td>
@@ -137,4 +148,28 @@
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar Fancybox
+            Fancybox.bind("[data-fancybox='pdf-preview']", {
+                // Configuración específica para PDFs
+                iframe: {
+                    // Prevenir la descarga directa del PDF
+                    preload: false,
+                    // Configurar el visor de PDF del navegador
+                    attr: {
+                        allow: 'autoplay; fullscreen',
+                        sandbox: 'allow-scripts allow-same-origin allow-popups allow-forms'
+                    }
+                },
+                // Otras opciones de Fancybox
+                thumbs: false,
+                toolbar: true,
+                closeButton: true,
+                fullscreen: true,
+                dragToClose: true,
+            });
+        });
+    </script>
 </x-app-layout>

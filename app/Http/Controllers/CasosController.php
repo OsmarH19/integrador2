@@ -187,12 +187,18 @@ class CasosController extends Controller
     public function downloadPdf($id)
     {
         $caso = Casos::findOrFail($id);
+        $pdfPath = 'storage/app/pdfs/casos/' . basename($caso->pdf_path);
 
-        if (!Storage::exists($caso->pdf_path)) {
+        if (!file_exists($pdfPath)) {
             abort(404);
         }
 
-        return Storage::download($caso->pdf_path);
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . basename($caso->pdf_path) . '"'
+        ];
+
+        return response()->file($pdfPath, $headers);
     }
 
     public function consultaDni(Request $request)
