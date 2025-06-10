@@ -5,71 +5,84 @@
     <title>Reporte de Caso #{{ $caso->id }}</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 12px;
-            color: #333;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            color: #2c3e50;
             margin: 40px;
             background: #fff;
+            line-height: 1.6;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #004080;
-            padding-bottom: 10px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #1a5276;
+            padding-bottom: 15px;
         }
 
         .title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #004080;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a5276;
+            letter-spacing: 1px;
         }
 
         .subtitle {
             font-size: 14px;
-            color: #666;
+            color: #7f8c8d;
+            margin-top: 4px;
         }
 
         .section {
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            background-color: #fafafa;
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
-            color: #004080;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #004080;
-            padding-bottom: 4px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #1a5276;
         }
 
         .row {
             display: flex;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .label {
-            width: 180px;
+            width: 200px;
             font-weight: 600;
-            color: #222;
+            color: #2c3e50;
         }
 
         .value {
             flex: 1;
-            color: #444;
+            color: #34495e;
         }
 
         .footer {
-            margin-top: 40px;
+            margin-top: 50px;
             font-size: 11px;
             text-align: right;
-            color: #666;
+            color: #7f8c8d;
             border-top: 1px solid #ccc;
             padding-top: 10px;
+        }
+
+        @media print {
+            body {
+                margin: 20mm;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
