@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\File;
 use DB;
 use Illuminate\Support\Facades\Http;
 use PDF;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NuevoCasoNotificacion;
 
 class CasosController extends Controller
 {
@@ -114,6 +116,12 @@ class CasosController extends Controller
             $casos->save();
 
             DB::commit();
+
+            // Obtener el médico auditor
+            $medico = Medicos_Auditores::find($request->medico_auditorID);
+
+            // Enviar correo
+            Mail::to($medico->email)->send(new NuevoCasoNotificacion($casos, $medico));
 
             return redirect()->route('casos.listado')
                 ->with('success', 'Caso creado correctamente')
