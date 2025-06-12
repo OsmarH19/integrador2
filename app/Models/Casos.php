@@ -35,11 +35,12 @@ class Casos extends Model
        'TipoCertificado',
        'NumeroAseguradora',
        'pdf_path',
+       'medico_auditorID',
     ];
 
-    public function compania()
+    public function compania(): BelongsTo
     {
-        return $this->belongsTo(CatDatosMaestro::class, 'compania_id');
+        return $this->belongsTo(CatDatosMaestro::class, 'compania_id', 'MaeestroID');
     }
 
     public function servicio()
@@ -70,6 +71,11 @@ class Casos extends Model
     public function lesionado()
     {
         return $this->hasOne(Lesionados::class, 'caso_id');
+    }
+
+    public function medicoAuditor()
+    {
+        return $this->belongsTo(Medicos_Auditores::class, 'medico_auditorID');
     }
 
 }

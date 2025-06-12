@@ -13,6 +13,7 @@ use App\Models\Lesionados;
 use App\Models\Aseguradoras;
 use App\Models\CentrosMedicos;
 use App\Models\Polizas;
+use App\Models\Medicos_Auditores;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Auth;
@@ -25,18 +26,21 @@ class CasosController extends Controller
 {
     public function listadoCasos()
     {
+        $tipoidentificacion = CatDatosMaestro::where( 'TipoID', 1 )->get();
+        $compañia = CatDatosMaestro::where( 'TipoID', 4 )->get();
+        $servicio = CatDatosMaestro::where( 'TipoID', 5 )->get();
         $casos = Casos::orderBy('id', 'ASC')->get();
-        return view('pages.casos.ListadoCasos', compact('casos'));
+        return view('pages.casos.ListadoCasos', compact('casos','compañia' , 'servicio', 'tipoidentificacion'));
     }
 
     public function DatosFormulario()
     {
-        $catpais = CatPais::all();
         $tipoidentificacion = CatDatosMaestro::where( 'TipoID', 1 )->get();
         $compañia = CatDatosMaestro::where( 'TipoID', 4 )->get();
         $servicio = CatDatosMaestro::where( 'TipoID', 5 )->get();
+        $medicosAuditores = Medicos_Auditores::all();
 
-        return view( 'pages.casos.NewCasos', compact( 'catpais','compañia' , 'servicio', 'tipoidentificacion' ) );
+        return view( 'pages.casos.NewCasos', compact( 'compañia' , 'servicio', 'tipoidentificacion', 'medicosAuditores' ) );
     }
 
     public function NewCasos(Request $request)
@@ -60,6 +64,7 @@ class CasosController extends Controller
             $casos->lesionado_numero_documento = $request->lesionado_numero_documento;
             $casos->poliza_id = $request->poliza_id;
             $casos->centro_medico_id = $request->centro_medico_id;
+            $casos->medico_auditorID = $request->medico_auditorID;
 
             if ($request->has('Placa') && $request->Placa) {
                 $casos->Placa = $request->Placa;

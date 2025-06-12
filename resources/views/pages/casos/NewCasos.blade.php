@@ -262,6 +262,33 @@
                             </div>
                         </div>
 
+                        {{-- MEDICO AUDITOR --}}
+                        <div class="md:mt-5">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-4">Médico Auditor</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                <div>
+                                    <label for="medico_auditorID"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Médico</label>
+                                    <select name="medico_auditorID" id="medico_auditorID" required
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="" disabled selected>Seleccione un médico</option>
+                                        @foreach (\App\Models\Medicos_Auditores::all() as $medico)
+                                            <option value="{{ $medico->id }}" data-email="{{ $medico->email }}">
+                                                {{ $medico->nombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="email"
+                                        class="block mb-1 text-sm font-medium text-gray-600">Correo</label>
+                                    <input type="text" name="email" id="email" required
+                                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase" />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     {{-- ERRORES --}}
                     @if ($errors->any())
@@ -474,6 +501,15 @@
                     });
 
                 }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#medico_auditorID').change(function() {
+                var selectedOption = $(this).find('option:selected');
+                var email = selectedOption.data('email');
+
+                $('#email').val(email);
             });
         });
     </script>

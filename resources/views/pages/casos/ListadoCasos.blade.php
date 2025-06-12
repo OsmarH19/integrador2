@@ -51,7 +51,7 @@
                                         </th>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                                            Compania
+                                            Centro Médico
                                         </th>
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
@@ -94,6 +94,7 @@
 
                                 <tbody>
                                     @foreach ($casos as $caso)
+                                    {{-- {{ dd($caso->compania->nombre) }} --}}
                                         <tr class="hover:bg-slate-50 dark:hover:bg-navy-600">
                                             <td class="whitespace-nowrap px-3 py-2">
                                                 @if($caso->pdf_path)
@@ -111,7 +112,7 @@
                                                 </button>
                                                 @endif
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->compania->nombre ?? 'N/A' }}</td>
+                                            <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->centroMedico->nombre ?? 'N/A' }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->Placa ?? 'N/A'}}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ $caso->descripcion }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">{{ \Carbon\Carbon::parse($caso->fecha_incidente)->format('d/m/Y') }}</td>
