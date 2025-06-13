@@ -384,16 +384,16 @@
                                 $('#lesionado_apellido_materno').val(response.apellido_materno);
                                 $('#lesionado_apellido_materno_hidden').val(response
                                     .apellido_materno);
-
+                                    toastr.success('Datos correctamente consultados.');
                             } else {
-                                alert('No se encontró información para el DNI ingresado.');
+                                toastr.error('No se encontró información para el DNI ingresado.');
                                 $('#lesionado_nombres').val('');
                                 $('#lesionado_apellido_paterno').val('');
                                 $('#lesionado_apellido_materno').val('');
                             }
                         },
                         error: function() {
-                            alert('Error al consultar el DNI.');
+                            toastr.error('Error al consultar el DNI.');
                             $('#lesionado_nombres').val('');
                             $('#lesionado_apellido_paterno').val('');
                             $('#lesionado_apellido_materno').val('');
@@ -506,16 +506,16 @@
 
                                 $('#NumeroAseguradora').val(response.NumeroAseguradora);
                                 $('#NumeroAseguradora_hidden').val(response.NumeroAseguradora);
-
+                                toastr.success('Datos de la Placa correctamente consultados.');
                             } else {
-                                alert('No se encontró información para la Placa ingresada.');
+                                toastr.error('No se encontró información para la Placa ingresada.');
                                 $('#Placa').val('');
                                 $('#FechaInicio').val('');
                                 $('#FechaFin').val('');
                             }
                         },
                         error: function() {
-                            alert('Error al consultar la Placa.');
+                            toastr.error('Error al consultar la Placa.');
                             $('#Placa').val('');
                             $('#FechaInicio').val('');
                             $('#FechaFin').val('');
@@ -533,7 +533,6 @@
             $('#medico_auditorID').change(function() {
                 var selectedOption = $(this).find('option:selected');
                 var email = selectedOption.data('email');
-
                 $('#email').val(email);
             });
         });
@@ -543,11 +542,13 @@
             $('form').on('submit', function(e) {
                 $('#spinner-overlay').removeClass('hidden');
                 $('button[type="submit"]').prop('disabled', true);
+                toastr.info('Enviando Correo.');
             });
 
             $(document).ajaxError(function() {
                 $('#spinner-overlay').addClass('hidden');
                 $('button[type="submit"]').prop('disabled', false);
+                toastr.error('Correo no enviado.');
             });
         });
     </script>
