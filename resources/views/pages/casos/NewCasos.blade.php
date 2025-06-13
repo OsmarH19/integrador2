@@ -25,6 +25,30 @@
             outline: none;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
         }
+
+        <style>#spinner-overlay {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(2px);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 
     <main class="main-content w-full px-[var(--margin-x)] pb-8">
@@ -290,6 +314,7 @@
                         </div>
 
                     </div>
+
                     {{-- ERRORES --}}
                     @if ($errors->any())
                         <div class="p-4 bg-red-50 border border-red-400 text-red-700 rounded-lg">
@@ -411,7 +436,7 @@
             function toggleSecciones() {
                 const companiaSeleccionada = companiaSelect.value !== '';
                 const servicioSeleccionado = servicioSelect.value !== '';
-                const esServicio2 = servicioSelect.value === '2'; // Verifica si el servicio es 2
+                const esServicio2 = servicioSelect.value === '2';
 
                 if (companiaSeleccionada && servicioSeleccionado) {
                     seccionOculta.style.display = 'block';
@@ -510,6 +535,19 @@
                 var email = selectedOption.data('email');
 
                 $('#email').val(email);
+            });
+        });
+
+        // SPINNER
+        $(document).ready(function() {
+            $('form').on('submit', function(e) {
+                $('#spinner-overlay').removeClass('hidden');
+                $('button[type="submit"]').prop('disabled', true);
+            });
+
+            $(document).ajaxError(function() {
+                $('#spinner-overlay').addClass('hidden');
+                $('button[type="submit"]').prop('disabled', false);
             });
         });
     </script>
