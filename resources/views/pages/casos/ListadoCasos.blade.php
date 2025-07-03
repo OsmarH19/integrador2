@@ -5,14 +5,15 @@
             <div class="mt-12 text-start flex flex-wrap items-start justify-between gap-6 w-full">
                 <h3 class="text-xl font-semibold text-slate-600 dark:text-navy-100">
                     Listado Casos </h3>
-
-                <div class="pr-5">
-                    <a href="{{ route('layouts/casos') }}"
-                        class="btn rounded-xl bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                        <span>Nuevo</span>
-                        <i class="fa-solid fa-plus pl-2.5"></i>
-                    </a>
-                </div>
+                @if (Auth::user()->rolID == 12 || Auth::user()->rolID == 11)
+                    <div class="pr-5">
+                        <a href="{{ route('layouts/casos') }}"
+                            class="btn rounded-xl bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                            <span>Nuevo</span>
+                            <i class="fa-solid fa-plus pl-2.5"></i>
+                        </a>
+                    </div>
+                @endif
 
             </div>
             <div class="py-4">
@@ -45,14 +46,18 @@
                             <table x-ref="table" class="w-full text-left">
                                 <thead>
                                     <tr>
-                                        <th
-                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                                            Ver
-                                        </th>
-                                        <th
-                                            class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                                            Editar
-                                        </th>
+                                        @if (Auth::user()->rolID == 12 || Auth::user()->rolID == 10)
+                                            <th
+                                                class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                                Ver
+                                            </th>
+                                        @endif
+                                        @if (Auth::user()->rolID == 12 || Auth::user()->rolID == 10)
+                                            <th
+                                                class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                                Editar
+                                            </th>
+                                        @endif
                                         <th
                                             class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                                             Centro Médico
@@ -100,29 +105,34 @@
                                     @foreach ($casos as $caso)
                                         {{-- {{ dd($caso->compania->nombre) }} --}}
                                         <tr class="hover:bg-slate-50 dark:hover:bg-navy-600">
-                                            <td class="whitespace-nowrap px-3 py-2">
-                                                @if ($caso->pdf_path)
-                                                    <a href="{{ asset('storage/' . $caso->pdf_path) }}" target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        class="btn size-7 p-0 text-info hover:bg-info/20"
-                                                        title="Ver PDF">
-                                                        <i class="fa-regular fa-file-pdf text-xs"></i>
-                                                    </a>
-                                                @else
-                                                    <button class="btn size-7 p-0 text-gray-400 hover:bg-gray-100/20"
-                                                        title="PDF no disponible" disabled>
-                                                        <i class="fa-regular fa-file-pdf text-xs"></i>
+                                            @if (Auth::user()->rolID == 12 || Auth::user()->rolID == 10)
+                                                <td class="whitespace-nowrap px-3 py-2">
+                                                    @if ($caso->pdf_path)
+                                                        <a href="{{ asset('storage/' . $caso->pdf_path) }}"
+                                                            target="_blank" rel="noopener noreferrer"
+                                                            class="btn size-7 p-0 text-info hover:bg-info/20"
+                                                            title="Ver PDF">
+                                                            <i class="fa-regular fa-file-pdf text-xs"></i>
+                                                        </a>
+                                                    @else
+                                                        <button
+                                                            class="btn size-7 p-0 text-gray-400 hover:bg-gray-100/20"
+                                                            title="PDF no disponible" disabled>
+                                                            <i class="fa-regular fa-file-pdf text-xs"></i>
+                                                        </button>
+                                                    @endif
+                                                </td>
+                                            @endif
+                                            @if (Auth::user()->rolID == 12 || Auth::user()->rolID == 10)
+                                                <td class="whitespace-nowrap px-3 py-2">
+                                                    <button
+                                                        @click="showModal = true; cargarDatosCaso({{ json_encode($caso) }})"
+                                                        class="btn size-7 p-0 text-info hover:bg-gray-100/20"
+                                                        title="Editar Caso">
+                                                        <i class="fa-solid fa-pen-to-square text-xs"></i>
                                                     </button>
-                                                @endif
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-2">
-                                                <button
-                                                    @click="showModal = true; cargarDatosCaso({{ json_encode($caso) }})"
-                                                    class="btn size-7 p-0 text-info hover:bg-gray-100/20"
-                                                    title="Editar Caso">
-                                                    <i class="fa-solid fa-pen-to-square text-xs"></i>
-                                                </button>
-                                            </td>
+                                                </td>
+                                            @endif
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">
                                                 {{ $caso->centroMedico->nombre ?? 'N/A' }}</td>
                                             <td class="whitespace-nowrap px-3 py-2 uppercase">

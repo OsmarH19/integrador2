@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\CatDatosMaestro;
 
 class User extends Authenticatable
 {
@@ -22,7 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'photo',
-        'empresaID', // Agregar empresaID para permitir asignación masiva
+        'empresaID',
+        'rolID' // Agregar empresaID para permitir asignación masiva
     ];
 
     /**
@@ -54,5 +56,12 @@ class User extends Authenticatable
     public function empresa(): BelongsTo
     {
         return $this->belongsTo(Empresa::class, 'empresaID');
+    }
+
+
+    public function rol()
+    {
+        return $this->belongsTo(CatDatosMaestro::class, 'rolID', 'MaeestroID')
+                    ->where('TipoID', 6);
     }
 }

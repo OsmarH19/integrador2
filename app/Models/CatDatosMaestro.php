@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class CatDatosMaestro extends Model
 {
@@ -19,4 +20,10 @@ class CatDatosMaestro extends Model
         ,'updated_at'
         ,'updated_by'
     ];
+
+    public function usuarios()
+    {
+        return $this->hasMany(User::class, 'rolID', 'MaeestroID');
+    }
+
 }
