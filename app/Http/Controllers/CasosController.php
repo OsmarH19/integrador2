@@ -28,11 +28,19 @@ class CasosController extends Controller
 {
     public function listadoCasos()
     {
-        $tipoidentificacion = CatDatosMaestro::where( 'TipoID', 1 )->get();
-        $compañia = CatDatosMaestro::where( 'TipoID', 4 )->get();
-        $servicio = CatDatosMaestro::where( 'TipoID', 5 )->get();
+        $tipoidentificacion = CatDatosMaestro::where('TipoID', 1)->get();
+        $compañia = CatDatosMaestro::where('TipoID', 4)->get();
+        $servicio = CatDatosMaestro::where('TipoID', 5)->get();
+        $centrosMedicos = CentrosMedicos::all();
         $casos = Casos::orderBy('id', 'ASC')->get();
-        return view('pages.casos.ListadoCasos', compact('casos','compañia' , 'servicio', 'tipoidentificacion'));
+
+        return view('pages.casos.ListadoCasos', compact(
+            'casos',
+            'compañia',
+            'servicio',
+            'tipoidentificacion',
+            'centrosMedicos'
+        ));
     }
 
     public function DatosFormulario()
@@ -120,7 +128,6 @@ class CasosController extends Controller
             // Obtener el médico auditor
             $medico = Medicos_Auditores::find($request->medico_auditorID);
 
-            // Enviar correo
             Mail::to($medico->email)->send(new NuevoCasoNotificacion($casos, $medico));
 
             return redirect()->route('casos.listado')
@@ -133,6 +140,62 @@ class CasosController extends Controller
             return back()->withInput()->with('error', 'Ocurrió un error al guardar el caso.');
         }
     }
+
+public function updateCaso(Request $request)
+{
+    if (!DB::connection()->getPdo()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error de conexión a la base de datos'
+        ], 500);
+    }
+
+    try {
+        DB::statement('CALL sp_ActualizarCasoYLesionado(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+            $request->input('p_caso_id'),
+            $request->input('p_compania_id'),
+            $request->input('p_servicio_id'),
+            $request->input('p_descripcion'),
+            $request->input('p_fecha_incidente'),
+            $request->input('p_ubicacion'),
+            $request->input('p_lesionado_nombres'),
+            $request->input('p_lesionado_apellido_paterno'),
+            $request->input('p_lesionado_apellido_materno'),
+            $request->input('p_lesionado_tipo_documento'),
+            $request->input('p_lesionado_numero_documento'),
+            $request->input('p_poliza_id'),
+            $request->input('p_centro_medico_id'),
+            $request->input('p_estado') ?? 0,
+            $request->input('p_Placa') ?? null,
+            $request->input('p_FechaInicio') ?? null,
+            $request->input('p_FechaFin') ?? null,
+            $request->input('p_EstadoPlaca') ?? null,
+            $request->input('p_NombreClaseVehiculo') ?? null,
+            $request->input('p_TipoCertificado') ?? null,
+            $request->input('p_NumeroAseguradora') ?? null,
+            $request->input('p_medico_auditorID') ?? null
+        ]);
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Caso actualizado correctamente'
+        ]);
+
+    } catch (\Exception $e) {
+        if (DB::transactionLevel() > 0) {
+            DB::rollBack();
+        }
+
+        \Log::error('Error al actualizar el caso: ' . $e->getMessage());
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Error al actualizar el caso',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 
     public function downloadPdf($id)
     {

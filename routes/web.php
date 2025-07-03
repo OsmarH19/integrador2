@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/casos', [CasosController::class, 'NewCasos'])->name('casos.store');
     Route::get('/ListadoCasos', [CasosController::class, 'listadoCasos'])->name('layouts/Registroscasos');
     Route::get('/casos/{id}/pdf', [CasosController::class, 'downloadPdf'])->name('casos.download');
+    // Route::post('/casos/{id}/update', [CasosController::class, 'updateCaso'])->name('casos.update');
+    Route::post('/casos/update', [CasosController::class, 'updateCaso'])->name('casos.update');
 
 
     // MANTENIMIENTO
