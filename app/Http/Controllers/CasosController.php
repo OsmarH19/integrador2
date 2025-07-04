@@ -217,7 +217,7 @@ public function updateCaso(Request $request)
     public function consultaDni(Request $request)
     {
         $dni = $request->dni;
-        $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODEiLCJuYW1lIjoiQ29ycG9yYWNpb24gQUNNRSIsImVtYWlsIjoicmZsb3JlekBhY21ldGljLmNvbS5wZSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImNvbnN1bHRvciJ9.06GySJlpTrqWUQA5EI3tDHvLn8LNzZ2m5VBSIy_SbF4';
+        $token = '';
 
         try {
             $client = new \GuzzleHttp\Client();
@@ -250,7 +250,7 @@ public function updateCaso(Request $request)
     public function consultaPlaca(Request $request)
     {
         $placa = $request->Placa;
-        $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MTQ5Ng.SLSuO2UYeZI0KsDGTSoz-yNGPN9HbHxha4T2FPglIFY';
+        $token = '';
 
         try {
             $client = new \GuzzleHttp\Client();
